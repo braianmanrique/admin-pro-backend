@@ -7,20 +7,19 @@ const {dbConnection} = require('./database/config');
 const app = express();
 //configurar cors
 app.use(cors());
+
+// read and parser body
+app.use(express.json());
 //Bd
 dbConnection()
 
 
 // Rutas
-app.get('/' , (req, res) => {
-    res.json({
-        ok:true,
-        msg: 'hello'
-    })
-});
+app.use('/api/usuarios', require('./routes/usuarios'));
+app.use('/api/login', require('./routes/auth'));
 
-// ibwBbfsN8EuP1Fv5
-// mean_user
+
+
 
 app.listen(process.env.PORT, () =>{
     console.log('server run'+ process.env.PORT);
